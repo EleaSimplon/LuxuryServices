@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete your account ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+    <button class="btn waves-effect waves-light btn-large red lighten-1">Delete my account<i class="material-icons">&#xE872;</i></button>
+</form>
+
+{# <a href="#!" onclick="return prompt('Please Type \'Delete my account\' to delete your K-Yachting Services account:') == 'Delete my account'" class="btn btn-block btn-lg waves-effect waves-light"><i class="material-icons">&#xE872;</i>Delete my account</a> #}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InfoAdminCandidat{% endblock %}
+
+{% block body %}
+    <h1>InfoAdminCandidat</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ info_admin_candidat.id }}</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ info_admin_candidat.notes }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ info_admin_candidat.createdAt ? info_admin_candidat.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ info_admin_candidat.updatedAt ? info_admin_candidat.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DeletedAt</th>
+                <td>{{ info_admin_candidat.deletedAt ? info_admin_candidat.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Files</th>
+                <td>{{ info_admin_candidat.files }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('info_admin_candidat_index') }}">back to list</a>
+
+    <a href="{{ path('info_admin_candidat_edit', {'id': info_admin_candidat.id}) }}">edit</a>
+
+    {{ include('info_admin_candidat/_delete_form.html.twig') }}
+{% endblock %}

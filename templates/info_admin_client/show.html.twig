@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InfoAdminClient{% endblock %}
+
+{% block body %}
+    <h1>InfoAdminClient</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ info_admin_client.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ info_admin_client.name }}</td>
+            </tr>
+            <tr>
+                <th>PostOccupied</th>
+                <td>{{ info_admin_client.postOccupied }}</td>
+            </tr>
+            <tr>
+                <th>NumContact</th>
+                <td>{{ info_admin_client.numContact }}</td>
+            </tr>
+            <tr>
+                <th>MailContact</th>
+                <td>{{ info_admin_client.mailContact }}</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ info_admin_client.notes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('info_admin_client_index') }}">back to list</a>
+
+    <a href="{{ path('info_admin_client_edit', {'id': info_admin_client.id}) }}">edit</a>
+
+    {{ include('info_admin_client/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,13 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit InfoAdminCandidat{% endblock %}
 
 {% block body %}
-    <h1>Edit InfoAdminCandidat</h1>
+
+      <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="white-text">Modify your comment</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">Show User List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# <a href="{{ path('info_admin_candidat_index') }}">back to list</a> #}
 
     {{ include('info_admin_candidat/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('info_admin_candidat_index') }}">back to list</a>
+    <div class="row center">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a class="btn gradient secondary waves-effect waves-light" href="{{ path('admin_user_show', {'id' : user.id}) }}"><i class="material-icons prefix">arrow_back</i> back to user {{ user.firstName}}</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-4">
+            {{ include('info_admin_candidat/_delete_form.html.twig') }}
+        </div>
+         <div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-4">
+            
+        </div>
+    </div>
 
-    {{ include('info_admin_candidat/_delete_form.html.twig') }}
 {% endblock %}

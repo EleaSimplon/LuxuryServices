@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+            
+    <style>
+        .card a {
+        color: white;
+        }
+    </style>
+    
+{% endblock %} 
+
+{% block body %}
+
+    <!-- Page Header-->
+    <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="white-text">Admin space</h2>
+                    <span class="white-text">Administer the Customer & Users informations</span>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">Admin Index</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{# ************** SECTION CONTAINER COMMENT CA MARCHE **************#}
+    <div class="container">
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block center">
+                        <i class="material-icons large blue-grey-text">assignment_ind</i>
+                        <h4 class="center">Total of Candidate</h4>
+                        <h2 class="light">
+                            {% set totalUser = 0 %}
+                            {% for user in users %}
+                                {% set totalUser = totalUser+1 %}
+                            {% endfor %}
+                            {{ totalUser }}
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="col  m4 s12">
+                    <div class="icon-block center">
+                       <i class="large material-icons blue-grey-text">perm_contact_calendar</i>
+                        <h4 class="center">Total of Customer</h4>
+                        <h2 class="light">
+                            {% set totalCustomer = 0 %}
+                            {% for customer in customers %}
+                                {% set totalCustomer = totalCustomer+1 %}
+                            {% endfor %}
+                            {{ totalCustomer }}
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="col s12 m4">
+                    <div class="icon-block center">
+                        <i class="material-icons large blue-grey-text">folder_shared</i>
+                        <h4 class="center">Total of Job Offer</h4>
+                        <h2 class="light">
+                            {% set totalOffer = 0 %}
+                            {% for job_offer in job_offers %}
+                                {% set totalOffer = totalOffer+1 %}
+                            {% endfor %}
+                            {{ totalOffer }}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row center">
+            <div class="col s12 m12">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                <span class="card-title">Admin</span>
+                <p>As an Admin, you can administer the Customer & the Candidate informations. Manage the Job offers...</p>
+                </div>
+                <div class="card-action">
+                <a class="btn gradient secondary waves-effect waves-light" href="{{ path('userlist') }}">User List</a>
+                <a class="btn gradient secondary waves-effect waves-light" href="{{ path('customerList') }}">Customer List</a>
+                <a class="btn gradient secondary waves-effect waves-light" href="{{ path('offerList') }}">Job Offer List</a>
+                <a class="btn gradient secondary waves-effect waves-light" href="{{ path('applicationList') }}">Application List</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+
+{% endblock %}

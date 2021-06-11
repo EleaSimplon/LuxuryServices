@@ -3,9 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Client;
+use App\Entity\JobCategory;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\JobCategoryType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ClientType extends AbstractType
 {
@@ -14,11 +19,12 @@ class ClientType extends AbstractType
         $builder
             ->add('societyName')
             ->add('nameContact')
-            ->add('mailContact')
-            ->add('phoneNumberContact')
-            ->add('createdAt')
-            ->add('activityType')
-            ->add('infoAdminClient')
+            ->add('mailContact', EmailType::class, [])
+            ->add('phoneNumberContact', TelType::class, [])
+            // ->add('createdAt')
+            ->add('activityType', EntityType::class, [
+                'class'  => JobCategory::class])
+            // ->add('infoAdminClient', null)
         ;
     }
 

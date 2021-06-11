@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+    <!-- Page Header-->
+    <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="white-text">List of Users</h2>
+                    <span class="white-text">Personnal & Professionnal informations</span>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">List of users</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="container">
+
+        <table class="table centered responsive-table">
+            <thead>
+                <tr>
+                    {# <th>Id</th> #}
+                    <th>Email</th>
+                    {# <th>Roles</th>
+                    <th>Gender</th> #}
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Adress</th>
+                    {# <th>Country</th>
+                    <th>Nationality</th> #}
+                    {# <th>Passport</th>
+                    <th>Cv</th>
+                    <th>Photo</th> #}
+                    <th>Search Location</th>
+                    {# <th>Birth Date</th> #}
+                    {# <th>BirthLocation</th> #}
+                    <th>Is Available To Work</th>
+                    {# <th>Description</th> #}
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    {# <td>{{ user.id }}</td> #}
+                    <td>{{ user.email }}</td>
+                    {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
+                    {# <td>{{ user.gender }}</td> #}
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.adress }}</td>
+                    {# <td>{{ user.country }}</td> #}
+                    {# <td>{{ user.nationality }}</td> #}
+                    {# <td>{{ user.passport }}</td>
+                    <td>{{ user.cv }}</td>
+                    <td>{{ user.photo }}</td> #}
+                    <td>{{ user.searchLocation }}</td>
+                    {# <td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td> #}
+                    {# <td>{{ user.birthLocation }}</td> #}
+                    <td>{{ user.isAvailable ? 'Yes' : 'No' }}</td>
+                    {# <td>{{ user.description }}</td> #}
+                    <td>
+                        <a style="width:14rem" class="btn brown lighten-2" href="{{ path('admin_user_show', {'id': user.id}) }}">Show More</a>
+                        <a style="width:14rem" class="btn brown lighten-1" href="{{ path('user_edit', {'id': user.id}) }}">edit user</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="19">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>   
+
+    <div class="row">
+
+        <a class="btn red lighten-2" href="{{ path('admin', {'id': user.id}) }}"><i class="material-icons prefix">arrow_back</i> Back to Admin Dashboard</a> 
+           
+    </div>
+
+    {# <a href="{{ path('user_new') }}">Create new</a> #}
+
+{% endblock %}
+
+{# 
+{% block javascripts %}
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, {
+            direction: 'left',
+            hoverEnabled: false
+            });
+        });
+
+    </script>
+{% endblock %} #}

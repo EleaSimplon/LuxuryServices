@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Entity\User;
 
 /**
  * @Route("/info/admin/candidat")
@@ -26,9 +28,10 @@ class InfoAdminCandidatController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="info_admin_candidat_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
+     * @Route("/new/{id}", name="info_admin_candidat_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, User $user): Response
     {
         $infoAdminCandidat = new InfoAdminCandidat();
         $form = $this->createForm(InfoAdminCandidatType::class, $infoAdminCandidat);
@@ -39,12 +42,18 @@ class InfoAdminCandidatController extends AbstractController
             $entityManager->persist($infoAdminCandidat);
             $entityManager->flush();
 
-            return $this->redirectToRoute('info_admin_candidat_index');
+            $user->setInfoAdminCandidat($infoAdminCandidat);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_user_show',[
+                'id' => $user->getId()
+            ]);
         }
 
         return $this->render('info_admin_candidat/new.html.twig', [
             'info_admin_candidat' => $infoAdminCandidat,
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 
@@ -59,22 +68,29 @@ class InfoAdminCandidatController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/{id}/edit", name="info_admin_candidat_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, InfoAdminCandidat $infoAdminCandidat): Response
     {
         $form = $this->createForm(InfoAdminCandidatType::class, $infoAdminCandidat);
         $form->handleRequest($request);
-
+ $userRepository = $this->getDoctrine()->getRepository(User::class);
+            $user = $userRepository->findOneBy(['infoAdminCandidat'=>$infoAdminCandidat]);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('info_admin_candidat_index');
+           
+
+            return $this->redirectToRoute('admin_user_show',[
+                'id'=>$user->getId()
+            ]);
         }
 
         return $this->render('info_admin_candidat/edit.html.twig', [
             'info_admin_candidat' => $infoAdminCandidat,
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 

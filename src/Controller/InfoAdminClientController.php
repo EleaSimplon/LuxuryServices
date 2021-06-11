@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\InfoAdminClient;
 use App\Form\InfoAdminClientType;
 use App\Repository\InfoAdminClientRepository;
@@ -26,11 +27,13 @@ class InfoAdminClientController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="info_admin_client_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="info_admin_client_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Client $client): Response
     {
+        
         $infoAdminClient = new InfoAdminClient();
+
         $form = $this->createForm(InfoAdminClientType::class, $infoAdminClient);
         $form->handleRequest($request);
 
@@ -39,12 +42,18 @@ class InfoAdminClientController extends AbstractController
             $entityManager->persist($infoAdminClient);
             $entityManager->flush();
 
-            return $this->redirectToRoute('info_admin_client_index');
+            $client->setInfoAdminClient($infoAdminClient);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_customer_show', [
+                'id'=>$client->getId()
+            ]);
         }
 
         return $this->render('info_admin_client/new.html.twig', [
             'info_admin_client' => $infoAdminClient,
             'form' => $form->createView(),
+            'client' => $client
         ]);
     }
 
@@ -65,16 +74,23 @@ class InfoAdminClientController extends AbstractController
     {
         $form = $this->createForm(InfoAdminClientType::class, $infoAdminClient);
         $form->handleRequest($request);
+        
+        $clientRepository = $this->getDoctrine()->getRepository(Client::class);
+        $client = $clientRepository->findOneBy(['infoAdminClient' => $infoAdminClient]);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('info_admin_client_index');
+            return $this->redirectToRoute('admin_customer_show', [
+                'id'=>$client->getId()
+            ]);
         }
 
         return $this->render('info_admin_client/edit.html.twig', [
             'info_admin_client' => $infoAdminClient,
             'form' => $form->createView(),
+            'client' => $client
+
         ]);
     }
 

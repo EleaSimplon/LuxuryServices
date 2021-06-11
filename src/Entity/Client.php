@@ -48,7 +48,7 @@ class Client
     private $activityType;
 
     /**
-     * @ORM\OneToOne(targetEntity=InfoAdminClient::class, inversedBy="client", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=InfoAdminClient::class, cascade={"persist", "remove"})
      */
     private $infoAdminClient;
 
@@ -139,5 +139,11 @@ class Client
         $this->infoAdminClient = $infoAdminClient;
 
         return $this;
+    }
+
+
+    public function __toString(): ?string
+    {
+        return $this->getSocietyName();
     }
 }

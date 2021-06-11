@@ -1,13 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit InfoAdminClient{% endblock %}
-
 {% block body %}
-    <h1>Edit InfoAdminClient</h1>
+
+    <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="white-text">{{ client.societyName }}</h2>
+                    <span class="white-text">Modify your comment</span>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">Customer User List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
 
     {{ include('info_admin_client/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('info_admin_client_index') }}">back to list</a>
+    <a href="{{ path('admin_customer_show', {'id' : client.id}) }}">back to list</a>
 
     {{ include('info_admin_client/_delete_form.html.twig') }}
 {% endblock %}

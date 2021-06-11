@@ -17,8 +17,9 @@ class User implements UserInterface
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\Column(name="id", type="string")
+     * @ORM\CustomIdGenerator(class="Doctrine\Bundle\DoctrineBundle\IdGenerator")
      */
     private $id;
 
@@ -130,12 +131,17 @@ class User implements UserInterface
      */
     private $applications;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $completedProfile;
+
     public function __construct()
     {
         $this->applications = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -446,6 +452,36 @@ class User implements UserInterface
                 $application->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function toArray(){
+        return ['gender'=>$this->getGender(),
+                'firstname'=>$this->getFirstName(), 
+                'lastname'=>$this->getLastName(), 
+                'adress' => $this->getAdress(), 
+                'country' => $this->getCountry(),
+                'nationality' => $this->getNationality(),
+                'curriculumVitae' => $this->getCv(),
+                'profilPicture' => $this->getPhoto(),
+                'currentLocation' => $this->getSearchLocation(),
+                'dateOfBirth' => $this->getBirthDate(),
+                'placeOfBirth' => $this->getBirthLocation(),
+                'shortDescription' => $this->getDescription(),
+                'experience' => $this->getExperience(),
+                'jobCategory' => $this->getCategory(),
+                'passportFile' => $this->getPassport()];
+    }
+
+    public function getCompletedProfile(): ?bool
+    {
+        return $this->completedProfile;
+    }
+
+    public function setCompletedProfile(bool $completedProfile): self
+    {
+        $this->completedProfile = $completedProfile;
 
         return $this;
     }

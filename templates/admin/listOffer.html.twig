@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- Page Header-->
+    <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="white-text">List of offers</h2>
+                    <span class="white-text">All the offer of jobs</span>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">Job Offers</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="center">Total of Offers : {{ job_offers.getTotalItemCount }}</h2><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ref</th>
+                    <th>TitleJob</th>
+                    {# <th>SocietyName</th> #}
+                    <th>IsVisible</th>
+                    <th>CreatedAt</th>
+                    <th>ExpiredAt</th>
+                    <th>Salary</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for job_offer in job_offers %}
+                <tr>
+                    <td>{{ job_offer.id }}</td>
+                    {# <td>{{ job_offer.societyName }}</td> #}
+                    <td>{{ job_offer.titleJob }}</td>
+                    <td>{{ job_offer.isVisible ? 'Yes' : 'No' }}</td>
+                    <td>{{ job_offer.createdAt ? job_offer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ job_offer.expiredAt ? job_offer.expiredAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ job_offer.salary }} €</td>
+                    <td>{{ job_offer.location }}</td>
+                    <td>{{ job_offer.description }}</td>
+                    <td>
+                        {# <a href="{{ path('job_offer_show', {'id': job_offer.id}) }}">show</a> #}
+                        <a style="width:14rem" class="btn brown lighten-1" href="{{ path('job_offer_edit', {'id': job_offer.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ knp_pagination_render(job_offers) }}
+
+    </div>
+
+
+    <div class="row">
+        <a class="btn red lighten-2" href="{{ path('admin')}}"><i class="material-icons prefix">arrow_back</i> Back to Admin Dashboard</a>
+
+        <a class="btn" href="{{ path('offerNew') }}">Create new</a>
+    </div>
+ 
+
+{% endblock %}

@@ -61,6 +61,7 @@ class UserController extends AbstractController
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'id' => $this->getUser()->getId()
         ]);
     }
 
@@ -73,13 +74,17 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
+        $dataCandidat = $user->toArray();
+        $dataLength = count($dataCandidat);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($user);
+       
             $photo = $form->get('photo')->getData();
             $cv = $form->get('cv')->getData();
             $passport = $form->get('passport')->getData();
             $newPassword = $form->get('password')->getData();
+
+            
 
             if ($photo !== null) {
                 $newFilename = $this->upload($photo, 'photo_directory', $slugger);
@@ -92,6 +97,10 @@ class UserController extends AbstractController
             if ($passport !== null) {
                 $newFilename = $this->upload($passport, 'passport_directory', $slugger);
                 $user->setPassport($newFilename);
+            }
+
+            if ($dataLength === 15){
+                $user->setCompletedProfile(1);
             }
 
 
@@ -116,7 +125,9 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-
+            'dataCandidat' => $dataCandidat,
+            'dataLength' => $dataLength,
+            'completedProfile' => $user->getCompletedProfile()
         ]);
     }
 

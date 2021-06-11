@@ -1,13 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit JobOffer{% endblock %}
-
 {% block body %}
-    <h1>Edit JobOffer</h1>
+    
+    <!-- Page Header-->
+    <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="white-text">Offer</h2>
+                    <span class="white-text">Edit the job offer</span>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">Job Offers</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    {{ include('job_offer/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('job_offer_index') }}">back to list</a>
 
-    {{ include('job_offer/_delete_form.html.twig') }}
+    <div class="row">
+       
+        {{ include('job_offer/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a class="btn gradient secondary waves-effect waves-light" href="{{ path('offerList') }}"><i class="material-icons prefix">arrow_back</i> Back to list</a>
+    </div>
+
+    <div class="row">
+        {{ include('job_offer/_delete_form.html.twig') }}
+    </div>
+
 {% endblock %}

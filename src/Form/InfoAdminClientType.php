@@ -12,12 +12,12 @@ class InfoAdminClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('postOccupied')
-            ->add('numContact')
-            ->add('mailContact')
+            // ->add('name')
+            // ->add('postOccupied')
+            // ->add('numContact')
+            // ->add('mailContact')
             ->add('notes')
-            ->add('client')
+            // ->add('client')
         ;
     }
 

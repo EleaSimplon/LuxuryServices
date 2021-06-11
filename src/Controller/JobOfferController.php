@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\JobOffer;
+use App\Entity\User;
+use App\Entity\Application;
 use App\Form\JobOfferType;
 use App\Repository\JobOfferRepository;
+use App\Repository\JobCategoryRepository;
+use App\Repository\ApplicationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +22,24 @@ class JobOfferController extends AbstractController
     /**
      * @Route("/", name="job_offer_index", methods={"GET"})
      */
-    public function index(JobOfferRepository $jobOfferRepository): Response
+    public function index(JobOfferRepository $jobOfferRepository, JobCategoryRepository $jobCategoryRepository): Response
     {
         $user = $this->getUser();
 
+        $allJobCategory = $jobCategoryRepository->findAll();
+
+        if ($user instanceof User) {
+            $completedProfile = $user->getCompletedProfile();
+        }
+        else {
+            $completedProfile = null;
+        }
+
         return $this->render('job_offer/index.html.twig', [
             'job_offers' => $jobOfferRepository->findAll(),
-            'user' => $user
+            'user' => $user,
+            'categories' => $allJobCategory,
+            'completedProfile' => $completedProfile
         ]);
     }
 
@@ -48,16 +63,48 @@ class JobOfferController extends AbstractController
         return $this->render('job_offer/new.html.twig', [
             'job_offer' => $jobOffer,
             'form' => $form->createView(),
+            'completedProfile' => $this->getUser()->getCompletedProfile()
         ]);
     }
 
     /**
      * @Route("/{id}", name="job_offer_show", methods={"GET"})
      */
-    public function show(JobOffer $jobOffer): Response
+    public function show(JobOffer $jobOffer, ApplicationRepository $applicationRepository, JobOfferRepository $jobOfferRepository): Response
     {
+        $user = $this->getUser();
+
+        if ($user instanceof User) {
+            $completedProfile = $user->getCompletedProfile();
+        }else {
+            $completedProfile = null;
+        }
+
+        $candidacyExist = $applicationRepository->findOneBy(array('offer' => $jobOffer->getId()));
+
+        $allOffer = $jobOfferRepository->findAll();
+        $countOffer = count($allOffer);
+
+        $indexOffer = array_search($jobOffer, $allOffer, true);
+
+        if (!$indexOffer) {
+            $oneOfferIdPrevious = $allOffer[$countOffer-1];
+        }else {
+                $oneOfferIdPrevious = $allOffer[$indexOffer-1];
+            }
+
+        if ($indexOffer === $countOffer-1){
+            $oneOfferIdNext = $allOffer[0];
+        }else {
+                $oneOfferIdNext = $allOffer[$indexOffer+1];
+            }
+
         return $this->render('job_offer/show.html.twig', [
             'job_offer' => $jobOffer,
+            'completedProfile' => $completedProfile,
+            'candidacyExist' => $candidacyExist,
+            'oneOfferIdNext' => $oneOfferIdNext,
+            'oneOfferIdPrevious' =>$oneOfferIdPrevious
         ]);
     }
 

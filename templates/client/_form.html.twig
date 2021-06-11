@@ -1,4 +1,88 @@
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <style>
+        .dropdown-content{
+            max-height: none;
+        }
+        .datepicker-modal{
+            max-height: fit-content;
+        }
+        .datepicker-date-display{
+            background-color: #B6A575;
+        }
+        
+    </style>
+
+{% endblock %}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-extrabold center">Your society informations</h3>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-field">
+                        <i class="material-icons prefix">person_pin</i>
+                        {{ form_widget(form.societyName) }}
+                        {{ form_label(form.societyName, 'Society Name') }}
+                    </div>
+                </div>
+                <div class="clearfix visible-sm"></div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-field">
+                        {{ form_label(form.nameContact, 'Name of the contact') }}
+                        {{ form_widget(form.nameContact) }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-field">
+                        {{ form_label(form.mailContact, 'Mail') }}
+                        {{ form_widget(form.mailContact) }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="input-field">
+                        <i class="material-icons prefix">phone</i>
+                        {{ form_label(form.phoneNumberContact, 'Phone Number') }}
+                        {{ form_widget(form.phoneNumberContact) }}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <div class="input-field">
+                        {{ form_widget(form.activityType) }}
+                        {{ form_label(form.activityType, 'Job Category') }}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </section>
+    
+    
+    <div class="row">
+        <button class="btn">{{ button_label|default('Save') }}</button>
+        <a class="btn red lighten-2" href="{{ path('customerList') }}"><i class="material-icons prefix">arrow_back</i>back to list</a>
+    </div>
+
 {{ form_end(form) }}
+
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+ 
+    <script>
+        $(document).ready(function(){
+            $('select').formSelect();
+        });
+    </script>
+    <script>
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd' });
+    </script>
+
+{% endblock %}

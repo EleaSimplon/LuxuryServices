@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+            {% if user.photo %}
+                    <img style="width : 15rem" src="{{ asset('assets/photo/' ~ user.photo) }}">
+                {% else %}
+                   {{user.photo }}
+                {% endif %}
+                <div class="col-md-12">
+                
+                    <h2 class="white-text">{{ user.firstName}} {{ user.lastName}}</h2>
+                    <span class="white-text">Personnal & Professionanl informations</span>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">Show User List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <table class="table striped centered responsive-table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Roles</th>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>{{ user.password }}</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>{{ user.gender }}</td>
+                </tr>
+                <tr>
+                    <th>FirstName</th>
+                    <td>{{ user.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>LastName</th>
+                    <td>{{ user.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>Adress</th>
+                    <td>{{ user.adress }}</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>{{ user.country }}</td>
+                </tr>
+                <tr>
+                    <th>Nationality</th>
+                    <td>{{ user.nationality }}</td>
+                </tr>
+                <tr>
+                    <th>Passport</th>
+                    {% if user.passport %}
+                        <td><img style="width : 5rem" src="{{ asset('assets/passport/' ~ user.passport) }}"><a style ="margin-left : 4rem" href="{{ asset('assets/photo/' ~ user.photo) }}" download="photoUser">Download <i class="material-icons prefix">arrow_drop_down_circle</i></a></td>
+                    {% else %}
+                        <td>{{user.passport }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Cv</th>
+                    {% if user.cv %}
+                        <td><img style="width : 5rem" src="{{ asset('assets/cv/' ~ user.cv) }}"><a style ="margin-left : 4rem" href="{{ asset('assets/photo/' ~ user.photo) }}" download="photoUser">Download <i class="material-icons prefix">arrow_drop_down_circle</i></a></td>
+                    {% else %}
+                        <td>{{user.cv }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Photo</th>
+                    {% if user.photo %}
+                        <td><img style="width : 5rem" src="{{ asset('assets/photo/' ~ user.photo) }}"><a style ="margin-left : 4rem" href="{{ asset('assets/photo/' ~ user.photo) }}" download="photoUser">Download <i class="material-icons prefix">arrow_drop_down_circle</i></a></td>
+                    {% else %}
+                        <td>{{user.photo }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>SearchLocation</th>
+                    <td>{{ user.searchLocation }}</td>
+                </tr>
+                <tr>
+                    <th>BirthDate</th>
+                    <td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>BirthLocation</th>
+                    <td>{{ user.birthLocation }}</td>
+                </tr>
+                <tr>
+                    <th>IsAvailable</th>
+                    <td>{{ user.isAvailable ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ user.description }}</td>
+                </tr>
+                {% if info_admin %}
+                    <tr>
+                        <th>Comment</th>
+                        <td>{{ info_admin.notes }}</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="row center">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a class="btn gradient secondary waves-effect waves-light" href="{{ path('userlist', {'id': user.id}) }}"><i class="material-icons prefix">arrow_back</i> back to list</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-4">
+            <a class="btn gradient secondary waves-effect waves-light" href="{{ path('user_edit',   {'id': user.id}) }}">edit the profile</a>
+            
+            {% if info_admin == false %}
+
+                <a class="btn gradient secondary waves-effect waves-light" href="{{ path('info_admin_candidat_new', {'id' : user.id}) }}">Add a comment</a>
+
+                {% else %}
+                <a class="btn gradient secondary waves-effect waves-light" href="{{ path('info_admin_candidat_edit', {'id' : user.infoAdminCandidat.id}) }}">Edit your comment</a>
+
+            {% endif %}
+        </div>
+         <div class="col-xs-12 col-sm-4 col-md-4 col-md-offset-4">
+            {{ include('user/_delete_form.html.twig') }}
+        </div>
+    </div>
+   
+   
+{% endblock %}

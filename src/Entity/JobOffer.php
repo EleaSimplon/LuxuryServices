@@ -10,10 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class JobOffer
 {
-    /**
+     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\Column(name="id", type="string")
+     * @ORM\CustomIdGenerator(class="Doctrine\Bundle\DoctrineBundle\IdGenerator")
      */
     private $id;
 
@@ -33,7 +34,7 @@ class JobOffer
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string")
      */
     private $expiredAt;
 
@@ -54,7 +55,7 @@ class JobOffer
 
     /**
      * @ORM\ManyToOne(targetEntity=JobCategory::class, inversedBy="jobOffers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $category;
 
@@ -70,7 +71,7 @@ class JobOffer
      */
     private $client;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -111,12 +112,12 @@ class JobOffer
         return $this;
     }
 
-    public function getExpiredAt(): ?\DateTimeInterface
+    public function getExpiredAt(): ?string
     {
         return $this->expiredAt;
     }
 
-    public function setExpiredAt(\DateTimeInterface $expiredAt): self
+    public function setExpiredAt(string $expiredAt): self
     {
         $this->expiredAt = $expiredAt;
 
@@ -193,6 +194,11 @@ class JobOffer
         $this->client = $client;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getId();
     }
 
 }

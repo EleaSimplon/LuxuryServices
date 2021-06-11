@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\InfoAdminCandidat;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +14,12 @@ class InfoAdminCandidatType extends AbstractType
     {
         $builder
             ->add('notes')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('deletedAt')
-            ->add('files')
+            // ->add('createdAt')
+            // ->add('updatedAt')
+            // ->add('deletedAt')
+            ->add('files', FileType::class, [
+                'label' => ''
+            ])
         ;
     }
 

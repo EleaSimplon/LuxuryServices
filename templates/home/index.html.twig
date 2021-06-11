@@ -275,135 +275,60 @@
 
                         <ul class="portfolio-filter brand-filter text-center">
                             <li class="active waves-effect waves-light" data-group="all">All</li>
-                            <li class=" waves-effect waves-light" data-group="commercial">Commercial</li>
-                            <li class=" waves-effect waves-light" data-group="retail">Retail sales</li>
-                            <li class=" waves-effect waves-light" data-group="creative">Creative</li>
-                            <li class=" waves-effect waves-light" data-group="technology">Technology</li>
-                            <li class=" waves-effect waves-light" data-group="marketing">Marketing & PR</li>
-                            <li class=" waves-effect waves-light" data-group="fashion">Fashion & luxury</li>
-                            <li class=" waves-effect waves-light" data-group="management">Management & HR</li>
+                            {% for category in categories %}
+                                <li class=" waves-effect waves-light" data-group="{{category.category}}">{{category.category}}</li>
+                            {% endfor %}
                         </ul>
-                        <div class="portfolio portfolio-with-title col-2 gutter mt-30">
 
-                            <div class="portfolio-item" data-groups='["all", "commercial"]'>
-                                <div class="portfolio-wrapper">
-                                    <div class="card job-card">
-                                        <div class="card-content">
-                                            <span class="title">
-                                                <span class="card-title">2nd assistant position</span>
-                                                <span class="ref grey-text">Ref. 1062</span>
-                                            </span>
-                                            <div class="metas mb-20">
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE53E;</i>45k&euro;
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE916;</i>2018-10-01
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE55F;</i>Paris
-                                                </div>
-                                            </div>
-                                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
-                                        </div>
-                                        <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
-                                            <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-item" data-groups='["all", "commercial"]'>
-                                <div class="portfolio-wrapper">
-                                    <div class="card job-card">
-                                        <div class="card-content">
-                                            <span class="title">
-                                                <span class="card-title">2nd assistant position</span>
-                                                <span class="ref grey-text">Ref. 1062</span>
-                                            </span>
-                                            <div class="metas mb-20">
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE53E;</i>45k&euro;
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE916;</i>2018-10-01
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE55F;</i>Paris
-                                                </div>
-                                            </div>
-                                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
-                                        </div>
-                                        <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
-                                            <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-item" data-groups='["all", "creative"]'>
-                                <div class="portfolio-wrapper">
-                                    <div class="card job-card">
-                                        <div class="card-content">
-                                            <span class="title">
-                                                <span class="card-title">2nd assistant position</span>
-                                                <span class="ref grey-text">Ref. 1062</span>
-                                            </span>
-                                            <div class="metas mb-20">
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE53E;</i>45k&euro;
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE916;</i>2018-10-01
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE55F;</i>Paris
-                                                </div>
-                                            </div>
-                                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
-                                        </div>
-                                        <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
-                                            <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-item" data-groups='["all", "commercial"]'>
-                                <div class="portfolio-wrapper">
-                                    <div class="card job-card">
-                                        <div class="card-content">
-                                            <span class="title">
-                                                <span class="card-title">2nd assistant position</span>
-                                                <span class="ref grey-text">Ref. 1062</span>
-                                            </span>
-                                            <div class="metas mb-20">
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE53E;</i>45k&euro;
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE916;</i>2018-10-01
-                                                </div>
-                                                <div class="meta">
-                                                    <i class="material-icons">&#xE55F;</i>Paris
-                                                </div>
-                                            </div>
-                                            <p class="truncate-text">Nulla interdum, erat et mollis eleifend, urna turpis pellentesque dolor, sed rhoncus erat est sit amet diam. Aliquam dignissim ipsum nec lorem pulvinar.</p>
-                                        </div>
-                                        <div class="card-action">
-                                            <a class="btn btn-md primary border waves-effect waves-dark" href="/templates/jobs/show.html">Details</a>
-                                            <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        
+                            <div class="portfolio portfolio-with-title col-2 gutter mt-30">
 
-                            <div class="no-item"></div>
+                                {% for oneOffer in lastTen %}
 
-                        </div>
+                                    <div class="portfolio-item" data-groups='["all", "{{oneOffer.category.category}}"]'>
+                                        <div class="portfolio-wrapper">
+                                            <div class="card job-card">
+                                                <div class="card-content">
+                                                    <span class="title">
+                                                        <span class="card-title">{{ oneOffer.titleJob }}</span>
+                                                        <span class="ref grey-text">Ref. {{ oneOffer.id }}</span>
+                                                    </span>
+                                                    <div class="metas mb-20">
+                                                        <div class="meta">
+                                                            <i class="material-icons">&#xE53E;</i>{{ oneOffer.salary }}&euro;
+                                                        </div>
+                                                        <div class="meta">
+                                                            <i class="material-icons">&#xE916;</i>{{ oneOffer.expiredAt }}
+                                                        </div>
+                                                        <div class="meta">
+                                                            <i class="material-icons">&#xE55F;</i>{{ oneOffer.location }}
+                                                        </div>
+                                                    </div>
+                                                    <p class="truncate-text">{{ oneOffer.description }}</p>
+                                                </div>
+                                                <div class="card-action">
+                                                    <a class="btn btn-md primary border waves-effect waves-dark" href="{{ path ('job_offer_show', {'id': oneOffer.id}) }}">Details</a>
+                                                    {% if completedProfile == 1 %}
+                                                        <a class="btn btn-md primary waves-effect waves-light" href="{{ path ('application_new', {'id' : oneOffer.id}) }}">Apply</a>
+                                                    {% else %}
+                                                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                                        
+                                                            <a class="btn btn-md text-white red waves-effect waves-light" href="{{path ('user_edit',{'id': app.user.id}) }}">Complete profile to apply</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                {% endfor %}
+
+                                <div class="no-item"></div>
+
+                            </div>
 
                         <div class="text-center">
-                            <a href="/templates/jobs/index.html" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
+                            <a href="{{ path ('job_offer_index')}}" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
                         </div>
                     </div>
                 </div>

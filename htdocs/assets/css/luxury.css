@@ -35,6 +35,11 @@ body .tt-words-wrapper b{
 body .page-title-bg {
     background-image: url(../../assets/img/bg3.jpg);
 }
+
+body .page-index-admin {
+    background-color: gray;
+}
+
 body .log-section form .checkbox label {
     font-size: 16px
 }

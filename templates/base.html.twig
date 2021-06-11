@@ -44,6 +44,21 @@
             <link href="http://kys.idmkr.io/cache/assets/frontend.kys.revolution-layers.4f1e49eeb6f7351bbdc1fb6e35adb6ed_1547807826.css" rel="stylesheet">
             <link href="http://kys.idmkr.io/cache/assets/frontend.kys.revolution-navigation.2f4deeb1fe1d3f7c9ab31d29a1133835_1547807825.css" rel="stylesheet">
 
+                <style>
+                    .dropdown-content{
+                        max-height: none;
+                    }
+                    .datepicker-modal{
+                        max-height: fit-content;
+                    }
+                    .datepicker-date-display{
+                        background-color: #B6A575;
+                    }
+                    .tp-caption.boxshadow, .boxshadow {
+                        box-shadow: 0 0 0px rgb(0 0 0)!important;
+                    }
+                </style>
+                
             {% block stylesheets %}
             {% endblock %}
 
@@ -110,12 +125,14 @@
                                 <nav class="overlay-menu">
                                     <ul>
                                         <li><a href="/">Home</a></li>
-                                        <li><a href="/templates/jobs/index.html">Jobs Offers</a></li>
-                                        <li><a href="/templates/compagny.html">About Us</a></li>
-                                        <li><a href="/templates/contact.html">Contact</a></li>
+                                        <li><a href="{{ path ('job_offer_index') }}">Jobs Offers</a></li>
+                                        <li><a href="{{ path ('about_us') }}">About Us</a></li>
+                                        <li><a href="{{ path ('contact') }}">Contact</a></li>
                                         <li>-</li>
-                                        <li><a href="/templates/auth/profile.html">Profile</a></li>
-                                        <li><a href="/logout.html">Logout</a></li>
+                                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                                            <li><a href="{{path ('user_edit',{'id': app.user.id}) }}">Profile</a></li>
+                                            <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                                        {% endif %}
                                     </ul>
                                 </nav>
                             </div>
@@ -127,13 +144,18 @@
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 
                                 <ul class="menuzord-menu pull-right light" role="navigation">
-                                <li class=" dropdown">
-                                    <a class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register" href="{{path ('user_edit',{'id': user.id}) }}"><span>Profile</span></a>
-                                </li>
-                                <li>
-                                    <a class="btn bn-lg gradient red darken-1 btn-block waves-effect waves-light btn-register" href="{{ path('app_logout') }}">Logout</a>
-                                </li>
-                            </ul>
+                                    <li class=" dropdown">
+                                        <a class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register" href="{{path ('user_edit',{'id': app.user.id}) }}"><span>Profile</span></a>
+                                    </li>
+                                    {% if is_granted ('ROLE_ADMIN') %}
+                                        <li>
+                                            <a class="btn bn-lg gradient purple lighten-2 btn-block waves-effect waves-light btn-register" href="{{ path('admin') }}">Admin</a>
+                                        </li>
+                                    {% endif %}
+                                    <li>
+                                        <a class="btn bn-lg gradient red darken-1 btn-block waves-effect waves-light btn-register" href="{{ path('app_logout') }}">Logout</a>
+                                    </li>
+                                </ul>
 
                                 {% else %}
                                 <ul class="menuzord-menu pull-right light" role="navigation">
@@ -169,13 +191,13 @@
                                     </a>
                                 </li>
                                 <li class=" dropdown">
-                                    <a target="_self" href="/templates/compagny.html">
+                                    <a target="_self" href="{{ path ('about_us') }}">
                                         <i class=""></i>
                                         <span>About us</span>
                                     </a>
                                 </li>
                                 <li class=" dropdown">
-                                    <a target="_self" href="/templates/contact.html">
+                                    <a target="_self" href="{{ path ('contact') }}">
                                         <i class=""></i>
                                         <span>Contact</span>
                                     </a>
@@ -225,22 +247,22 @@
                 <div class="container">
                     <ul class="" role="navigation">
                         <li class="active dropdown">
-                            <a target="_self" href="/">
+                            <a target="_self" href="{{ path ('home') }}">
                                 <span>Home</span>
                             </a>
                         </li>
                         <li class=" dropdown">
-                            <a target="_self" href="/template/jobs/jobs.html">
+                            <a target="_self" href="{{ path ('job_offer_index') }}">
                                 <span>Jobs offers</span>
                             </a>
                         </li>
                         <li class=" dropdown">
-                            <a target="_self" href="/templates/compagny.html">
+                            <a target="_self" href="{{ path ('about_us') }}">
                                 <span>About us</span>
                             </a>
                         </li>
                         <li class=" dropdown">
-                            <a target="_self" href="/templates/contact.html">
+                            <a target="_self" href="{{ path ('contact') }}">
                                 <span>Contact</span>
                             </a>
                         </li>

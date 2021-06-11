@@ -47,4 +47,32 @@ class JobOfferRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // ONLY SHOW THE FIRST TEN OFFERS IN HOME/INDEX
+    public function findByTenLastOffer(){
+
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT 
+                job_offer,
+                jobCategory
+            FROM
+                App\Entity\JobOffer job_offer
+
+            JOIN job_offer.category jobCategory
+            ORDER BY job_offer.createdAt DESC '
+        )
+            ->setMaxResults(10);
+        return $query->getResult();
+    }
+
+    // /**
+    // * returns all JobOffer per page
+    // * @return void
+    // */
+    // public function getPaginatedOffer($page, $limit)
+    // {
+    //     $query = $this->createQueryBuilder('a')
+    //     ->where('a.active = 1')
+    // }
 }

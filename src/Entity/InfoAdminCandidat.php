@@ -32,10 +32,10 @@ class InfoAdminCandidat
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $deletedAt;
+    // /**
+    //  * @ORM\Column(type="datetime")
+    //  */
+    // private $deletedAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -83,17 +83,17 @@ class InfoAdminCandidat
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
-        return $this->deletedAt;
-    }
+    // public function getDeletedAt(): ?\DateTimeInterface
+    // {
+    //     return $this->deletedAt;
+    // }
 
-    public function setDeletedAt(\DateTimeInterface $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
+    // public function setDeletedAt(\DateTimeInterface $deletedAt): self
+    // {
+    //     $this->deletedAt = $deletedAt;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getFiles(): ?string
     {

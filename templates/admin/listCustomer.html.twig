@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- Page Header-->
+    <section class="page-title page-index-admin fixed-bg overlay dark-5 padding-top-160 padding-bottom-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="white-text">List of customers</h2>
+                    <span class="white-text">All the customer</span>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path ('home') }}">Home</a></li>
+                        <li class="active">Customers</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div  class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    {# <th>Id</th> #}
+                    <th>SocietyName</th>
+                    <th>NameContact</th>
+                    <th>MailContact</th>
+                    <th>PhoneNumberContact</th>
+                    <th>CreatedAt</th>
+                    <th>ActivityType</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for client in clients %}
+                <tr>
+                    {# <td>{{ client.id }}</td> #}
+                    <td>{{ client.societyName }}</td>
+                    <td>{{ client.nameContact }}</td>
+                    <td>{{ client.mailContact }}</td>
+                    <td>{{ client.phoneNumberContact }}</td>
+                    <td>{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ client.activityType }}</td>
+                    <td>
+                        <a style="width:14rem" class="btn brown lighten-2" href="{{ path('admin_customer_show', {'id': client.id}) }}">show more</a>
+                        <a style="width:14rem" class="btn brown lighten-1" href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+    <div class="row">
+
+        <a class="btn red lighten-2" href="{{ path('admin')}}"><i class="material-icons prefix">arrow_back</i> Back to Admin Dashboard</a>
+        <a class="btn gradient secondary waves-effect waves-light" href="{{ path('clientNew') }}">Create new</a>
+        
+    </div>
+
+{% endblock %}

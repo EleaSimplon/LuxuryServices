@@ -1,4 +1,33 @@
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+{% endblock %}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <section class="section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="input-field">
+                            <i class="material-icons prefix">message</i>
+                            {{ form_label(form.notes) }}
+                            {{ form_widget(form.notes, {'attr': {'type' : 'textarea', 'name' : 'description', 'id' : 'textarea2', 'class' : 'materialize-textarea'}})}}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="input-field">
+                            {{ form_label(form.files, ' ') }}
+                            {{ form_widget(form.files)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    
+
+    <button class="btn btn-large">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}
